@@ -1,8 +1,10 @@
 import { createContext, useContext } from 'react'
 import { assets } from '../assets/assets'
 import { AppContent } from '../context/AppContext'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
+const navigate = useNavigate()
 const {userData} = useContext(AppContent)
     return (
     <div className='flex flex-col items-center mt-20 px-4 text-center text-gray-800'>
@@ -14,7 +16,7 @@ const {userData} = useContext(AppContent)
       </h1>
       <h2 className='flex items-center gap-2 text-xl sm:text-4xl font-bold mb-2'>Welcome to Our App</h2>
       <p>Let's start with a quick product tour and we will have you up and running in no time</p>
-      <button className='cursor-pointer border border-gray-500 rounded-full px-8 py-2.5 hover:bg-gray-100 transition-all'>
+      <button onClick={()=>navigate("/login")} className='cursor-pointer border border-gray-500 rounded-full px-8 py-2.5 hover:bg-gray-100 transition-all'>
         Get Started
       </button>
     </div>

@@ -8,12 +8,7 @@ const userRouter = require("./routes/userRouter")
 const app = express()
 const port = process.env.PORT || 5000
 
-<<<<<<< HEAD
 const allowedOrigins =["http://localhost:5174"]
-=======
-const allowedOrigins =["https://authentication-app-1-nwtv.onrender.com"]
->>>>>>> 608be7bbaff2e23fcf8e3cc560cd0fddf463ae91
-
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({origin:allowedOrigins,
