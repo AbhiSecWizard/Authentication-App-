@@ -1,5 +1,6 @@
 require("dotenv").config();
 const path = require("path");
+const _dirname = path.resolve();
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -20,7 +21,7 @@ app.use(cookieParser());
 
 // ✅ Dynamic CORS (dev + prod)
 const allowedOrigins = [
-  "http://localhost:5174",
+  "https://authentication-app-5-1icl.onrender.com",
   process.env.CLIENT_URL, // production client URL
 ];
 
@@ -41,13 +42,13 @@ app.get("/api/health", (req, res) => {
 });
 
 // ✅ Serve React build AFTER api routes
-const __dirname1 = path.resolve();
-app.use(express.static(path.join(__dirname1, "client", "dist")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(_dirname, "/client/dist")));
 
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname1, "client", "dist", "index.html"));
-});
-
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(_dirname, "client", "dist", "index.html"));
+  });
+}
 // ✅ Start server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
